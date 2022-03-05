@@ -1,0 +1,394 @@
+<!-- <html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="d3.parcoords.js"></script>
+    <link rel="stylesheet" type="text/css" href="d3.parcoords.css">
+	
+</head> -->
+
+<!doctype html>
+<title>parallel-coordinates ... </title>
+<link rel="shortcut icon" type="img/png" href="./favicon.png">
+<!-- https://syntagmatic.github.io/parallel-coordinates -->
+<link rel="stylesheet" type="text/css" href="./d3.parcoords.css"> 
+<!-- <link rel="stylesheet" type="text/css" href="https://syntagmatic.github.io/parallel-coordinates/style.css"> -->
+<script src="https://syntagmatic.github.io/parallel-coordinates/examples/lib/d3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./style.css"> 
+<script src="./FileSaver.min.js"></script>
+<script src="./d3.svg.multibrush.js"></script>
+<!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
+<script src="../lib/plotly-latest.min.js"></script>
+<script src="./jscolor.js"></script>
+<!-- https://syntagmatic.github.io/parallel-coordinates -->
+<link rel="stylesheet" href="http://prodhpcts01/lib/jstree/themes/default/style.min.css" /> 
+<link rel="stylesheet" href="http://prodhpcts01/lib/css/glyphicons.css" />
+<script src="http://prodhpcts01/lib/jquery-latest.js"></script>
+<script src="http://prodhpcts01/lib/jstree/jstree.min.js"></script>
+<style>
+</style>
+
+<body>
+	<div id="main" style="width:87.8%;display:inline-block"> 
+		<div id="line1"><b>Parallel Coordinates Analysis</b></div>
+		<b><span id='labelDetail' style="background-color:rgb(247, 246, 188)"> ...... </span></b>
+		<div id="chart_dspsm" class="parcoords" style="width:100%;margin-left:0px;height:450px;background:#ffe;"></div></br>
+		<div id="infoT0"> 
+			<button title="click to toggle" id="_side" onclick="btClick(this.id)" >side bar</button>
+			<button title="click to toggle" id="_04" onclick="btClick(this.id)" style="background-color:#88f">live statistics</button>
+			<button title="click to toggle" id="_03" onclick="btClick(this.id)">examples</button>
+			<button title="click to toggle" id="_02" onclick="btClick(this.id)">YourOwn</button>
+			<button title="click to toggle" id="_01" onclick="btClick(this.id)">PC's Concept</button>
+			<button title="click to toggle" id="_00" onclick="btClick(this.id)">Credits, License ... Info</button>
+		</div>
+		<div id="infoT" style = "float:right">Additional Info: </div>		
+
+		<div id="info_"></div> 
+		<div id = "_04_" style="display:block">
+			<br><b>probability: <span id='counter' style="background-color:lightblue"> ... </span></b>
+			<span id='sel_' style="background-color:lightgreen"> ... </span>
+			<img src=".\img\userFF.png" style="float:right;width:50%;display:none;" id="_userFF_">
+			<button onclick="filteredOnly()">show filterd</button>
+			</br>
+			<button onclick="set_base()">re-base</button>
+			<b><span id='base' style="background-color:lightblue"> ...... </span></b>
+			<span id='base_' style="background-color:lightgreen"> ... </span>
+			<button onclick="set_note()">note</button>
+			<button onclick="cls_note()">clear note</button>
+			<button onclick="saveCSV()">save filtered data as a CSV file</button>
+			<button title="click to toggle the help" id="_userFF" onclick="btClick(this.id)">user f&f?</button>
+			<select id="chtBY" onchange="chartBy()" style="width:100px"></select>
+			<select id="chtType" onchange="chartBy()">
+				<option>none</option>
+				<option>distribution</option>
+				<option>duration</option>
+				<option>time series</option>
+				<option>scatter</option>
+			</select>
+			<button onclick="savePlotlyHTml()">viz</button>
+			<div id="chartSmry" style="display:none;float:right;width:50%;margin-left:0px;height:400px;background:#eef;"></div>
+			<br>
+			<iframe width="490" height="50" name="iframe_note" contenteditable="true"></iframe>
+			<select id="chtBY2" onchange="chartBy()" style="width:100px;display:inline-block;vertical-align:top"></select>
+			<select id="chtBYColor" onchange="chartBy()" style="width:100px;display:inline-block;vertical-align:top"></select>
+			<br>
+			<br>select pre-filtered results from the drop-down list ... <select id="caseselector" onchange="updateCase(this)" style="width:120px"></select><b><span id="filterTxt"> </span></b>
+			<br><br><font color="blue" size=4><B>Features ... :</b></font>
+			<br><b>Filtering data by values of any coordinate (column)</b><br>- click & drag to enable;<br>- click on un-filtered part to disable;<br>- move the filter bar and/or its top/bottom to adjust.
+			<div id="observ"></div>
+			<b>Filtering data coordinate (column)</b><br>- on right side, click to toggle.
+			<br><b>quick probobility calculation:</b><br>- change calculation base & taking notes for late use (copy / paste)...
+			<br><b>export filtered data:</b><br>save filtered data as a csv file (push botton)
+			<br><b>quick charts:</b><br>- use drop-down list to create distribution, accumulated distribution, time series, scatter chart between any two columns
+			<br><b>User formula example:</b><br>- test= +[17] + +[15] + +[16];<br>- test4= inRGs(+[26],[[-100, -180],[100,180]]) ? '>=100MW' : '100MW'
+		</div>
+		<div id = "_03_" style="display:none">
+			<img src=".\img\tspaFW.png" style="float:right;width:600px;">
+			<ul>
+			<li><strong>Hourly simulation analysis for TPP &hellip;</strong>
+				<ul>
+				<li><strong>FoxCreek area and more ... </strong>: prodhpcts01/pc/?path=pzamani&csv=Con_Fox%20Creek%20Lines_PC.csv&cfg=0.json</li>
+				</ul></li>	
+			<li><strong>Corelation between Wind and Solar &hellip;</strong>
+				<ul>
+				<li><strong>Corelation between Wind and Solar, 2025 forecast </strong>: http://prodhpcts01/pc/?path=enasrolahpour&csv=data_solar_case.csv</li>
+				<li><strong>Corelation between Wind and Solar, 2014-2018 Back-cast </strong>: http://prodhpcts01/pc/?path=mhu&csv=2014_18_WindSW_SolarSW.csv</li>
+				<li><strong>South region, updated with Future Solar </strong>: http://prodhpcts01/pc/?path=pub&csv=hrlyMW_South_2.csv </li>
+				</ul></li>	
+
+			<li><strong>CETO study conditions &hellip;</strong>
+			<ul>
+			<li><strong>historical performance</strong>: prodhpcts01/pc/?path=pub&amp;csv=hrlyMW_CETO_2.csv</li>
+			<li><strong>back-cast</strong>: prodhpcts01/pc/?path=pub&amp;csv=CETO_2018_StudyConditions.csv</li>
+			<li><strong>screening forecast result for detail analysis</strong>:&nbsp;prodhpcts01/TCFA/?csv=CETO_StudyConditions_2031.csv</li>
+			</ul></li>
+			<li><strong>Rainbow area analysis</strong>: prodhpcts01/pc/?path=basu&amp;csv=Rainbow_PI_2017_2019_v1.csv</li>
+			<li><strong>Calgary area</strong>: prodhpcts01/pc/?path=ewu&amp;csv=Calgary_2017-2018_V2.csv</li>
+			<li><strong>Red deer area</strong>: prodhpcts01/pc/?path=pub&amp;csv=hrlyMW_RedDeer_v2.csv</li>
+			<li><strong>South region</strong>: prodhpcts01/pc/?path=pub&amp;csv=hrlyMW_South_1.csv</li>
+			<li><strong>AIES</strong>: prodhpcts01/pc/?path=mhu&csv=pfm201811.csv</li>
+			<li><strong>____</strong>: prodhpcts01/pc</li>
+			<br>
+			<li><strong>NDV analysis</strong>: prodhpcts01/pc/?path=mhu&csv=Annual_metric_0807_txt.csv</li>
+			<li><strong>Dispatch tolerance Rule (203.4), system performance metrics</strong>: http://prodhpcts01/pc/?path=mhu&csv=DTR203-4_v2_SCP.csv&cfg=dt3.json</li>
+			<li><strong>Dispatch tolerance Rule (203.4), metrics by technology </strong>: http://prodhpcts01/pc/?path=mhu&csv=DTR203-4_v2_SMT.csv&cfg=dt3.json</li>
+			<br>
+			<li><strong>2020 flexibility metrics report </strong>: http://prodhpcts01/pc/?path=mhu&csv=FlexibilityMetrics2020.csv&cfg=dt3.json</li>
+	
+		</div>
+		<div id = "_02_" style="display:none">
+			<h2>Create/copy/update your csv file(s) as: <font color="red">\\aeso.ca\dfs\Technical\te\97\SystemPerformence\Transmission\csv\<font color="blue">yourFolder</font>\<font color="green">yourCSV</font>.csv</font></h2>
+			<img src=".\img\csvPrep.png" style="width:800px;">
+			<h2>The csv file change(s) you made above is checked and updated to this server every 60 seconds.</h2>
+			<h2>Upon the update, the new/updated dashboard can be accessed in Chrome by the URLs below:</h2>
+			<h1>- <font color="red">prodhpcts01/pc/?path=<font color="blue">yourFolder</font>&csv=<font color="green">yourCSV</font>.csv</font></h1>
+			<h1>- <font color="red">prodhpcts01/d/general/?path=<font color="blue">yourFolder</font>&csv=<font color="green">yourCSV</font>.csv</font></h1>
+			<h1>press [Ctrl + F5] for a full refresh of Chrome (with buffer clearing)</h1>
+			<br><br><br><br>
+			<h3>Please ignore the uplaod GUI below, it was implemented based on PHP that is NOT available on this server</h3> 
+			<b>upload your data</b> 
+			<!-- <input type="text" id="csvfile" value="mhu\pfm201811.csv" size="30"> -->
+			<input type="text" id="csvfile" value="mhu\hourlyMW2.csv" size="30">
+			<button onclick="refresh_csv()">refresh</button> 
+			<form action="/upload.php" method="post" enctype="multipart/form-data" target="iframe_1">
+				Select csv to upload:
+				<input type="file" name="fileToUpload" id="fileToUpload">
+				<input type="submit" value="Upload csv" name="submit">
+			</form> 
+			<form action="/csv_list.php" method="post" target="iframe_1">
+				<input type="submit" value="file list" name="submit_1">
+			</form> 
+			<!-- //<iframe style="display:none;" name="target"></iframe> -->
+			<iframe width="400" height="200" name="iframe_1"></iframe>
+		</div>
+		<div id = "_01_" style="display:none">
+			<table><tr>
+					<td valign="top" width="30%"> 
+						<font size=4>
+						<br><b>Parallel Coordinates</b> are a common way of visualizing high-dimensional geometry and analyzing multivariate data.
+						<br><br>Recent new advancement in interactive visualization techniques make it better and more convenient to ...               
+						<br><br>Create your own simple Interactive Parallel Coordinates chart using your own data (in a CSV file)  ... clicking button "your data" above"  
+						<br><br>fancy <a href="http://bl.ocks.org/syntagmatic/raw/3150059/" target="_blank"><b>example</b></a>
+						</font>           
+					</td>
+					<td width="20%">
+						<img src=".\img\pc_concept_2.png" style="width:100%;"><br><br>
+						<img src=".\img\pc_concept_3.png" style="width:100%;">
+					</td>
+					<td><img src=".\img\pcAnimation.gif" style="width:100%;height:60%;"></td>
+			</tr></table>
+			<img src=".\img\pc_concept_4.png" style="width:50%;">
+		</div>        
+		<div id = "_00_" style="display:none; width:100%;">
+			<br><h2>Adapted from examples by Kai Chang, Mike Bostock and Jason Davies ... </h2><br>
+			<div id="textBlock">
+			<b0>Related Information:</b0>
+			<b1><ul>
+			<li><strong>D</strong>ata-<strong>D</strong>riven <strong>D</strong>ocument (<strong>D3</strong>.js): <bl>https://d3js.org</bl> - by <u>Mike Bostock</u></li>
+			<li>Parallel Coordinates: <bl>https://syntagmatic.github.io/parallel-coordinates</bl> by <u>Kai Chang</u></li>
+			<li>Food Nutrient Explorer Example: <bl>http://bl.ocks.org/syntagmatic/raw/3150059</bl> - by <u>Kai Chang</u></li>
+			<li>AIES Historical Performance Dashboard Example: <bl><b>http://192.168.98.72:8082</b></bl> (AESO internal IP)</li> <bl>... ?csv=1.csv&?json=1.json</bl>
+			<li>Bottom-up VS. Top-down thinking &ndash; on just about everything <bl>https://wattsupwiththat.com/2017/10/22/bottom-up-versus-top-down-thinking-on-just-about-everything/</bl> - by <u>Neil </u><u>Lock</u></li>
+			</ul></b1></div>
+		</div>
+	</div>
+	<div id="_side_" style="width:12%; float:right; display:inline-block; display:">
+		<button style="width:70px; height:20px;" onclick="document.getElementById('getCSV').click()">local
+			csv</button>
+		<input type='file' accept='.csv' onchange='openFile(event)' id="getCSV" style="display:none">
+		<button title="click to refresh accoding to the list below" id="sBt" onclick="refresh_cht()">refresh</button><br>
+		<!-- <button title="click to refresh accoding to the list below" id="_04" onclick="dimRefresh()">refresh</button><br> -->
+		<select id="clrBy" style="display:block; height:20px;" onchange="clrBY(this)"></select>
+		<input id="colorT" onchange="updColor(this.jscolor,1)" value="ff0000" style="width:30px;height:15px" class="jscolor {padding:0, shadow:false,
+				borderWidth:0, backgroundColor:'transparent', insetColor:'#000'}">
+		<input id="colorB" onchange="updColor(this.jscolor,2)" value="00ff00" style="width:30px;height:15px" class="jscolor {width:100, padding:0, shadow:false,
+				borderWidth:0, backgroundColor:'transparent', insetColor:'#000'}">
+		<!-- <button title="click to hide all columns after 10th column" onclick="hide10()">Hide 10+</button><br>
+		<button title="click to un-hide all columns"  onclick="unhideAll()">Unhide all</button><br> -->
+		<!-- <input type="submit" value="hide 6+" onclick="hide10()" style="font-size : 9px" title="click to hide all columns after 10th column"/>
+		<input type="submit" value="unhide all" onclick="unhideAll()" style="font-size : 9px" title="click to un-hide all columns"/>
+		<div id="_side_1"></div>
+		<br>
+		filter the case (run)
+		<div id="_side_2"></div> -->
+		<br>Filter by / on Column <div id="tree_filter"></div>
+	</div>
+</body>
+</html>
+<script>
+    var data_sel       
+	var base_txt = ""
+	var sel_txt = ""
+	function getUrlVars() {
+		var vars = {};
+		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+			vars[key] = value;
+		});
+		return vars;
+	}
+
+    var path = getUrlVars()["path"];
+    var lcsv = getUrlVars()["lcsv"];
+	if ( path == undefined) {
+    		path = "";
+	} else {
+		path = path + '/';
+		path = path.replace(/%22/g,'')
+		path = path.replace(/%27/g,'')
+	}
+	
+	var csv = getUrlVars()["csv"];    //data csv file
+	
+	if (csv !== undefined) {
+		document.getElementById("csvfile").value = csv;
+		}
+	var json = getUrlVars()["cfg"];  //config json file
+	
+	if (json == undefined) {
+		// json = './csv' + '/0.json';       // default config json file
+		json = './0.json';       // default config json file
+	} else {
+		json = './csv/' + path +  json; 
+	}
+
+	var config_hm, userInfo
+	d3.json(json, function(error, caseData) {  					//json: location of config json file
+		config_hm = caseData.config_hm;
+		userInfo = caseData.userInfo;
+		if (caseData.line1 !== undefined) {
+			d3.select("#line1").html(caseData.line1); // set the page title
+		}
+ 		d3.select("#infoT") //hmhm: add a button
+ 		  .selectAll("button")
+ 		  .data(userInfo)
+ 		  .enter().append("button")
+		  	.attr("title","click to toggle")
+			.attr("id", function(d,i) { return 'info_'+i; })		  
+			.text(function(d,i) { return d[0]; })
+			.attr("onclick", "btClick(this.id)");			
+ 		d3.select("#info_") //hmhm: add div for each button
+ 		  .selectAll("div")
+ 		  .data(userInfo)
+ 		  .enter().append("div")
+			.attr("id", function(d,i) { return 'info_'+i+'_'; })		  
+			.text(function(d,i) { return d[0]; })
+			.html(function(d) { return d.slice(1,100).join(' '); })
+			.style("display","none")
+	});  
+
+    var csv_file = './csv/' + path + document.getElementById("csvfile").value;
+    function refresh_csv(){
+        csv_file = './csv/' + document.getElementById("csvfile").value;
+        document.getElementById("chart_dspsm").innerHTML = "";
+        refresh_cht();
+    }
+    
+    function set_base(){
+	    var patt = new RegExp("[0-9]*\]");
+		var str = patt.exec(d3.select("#counter").text());
+	    var patt1 = new RegExp("[0-9]*");
+		str = patt1.exec(str[0]);
+        //document.getElementById("base").innerHTML = str;
+		d3.select("#base").text(str)
+		base_txt = sel_txt
+		d3.select("#base_").text(base_txt)
+		d3.select("#sel_").text("")
+		d3.select("#counter").text("100%, [" + str +"]")
+		// refresh_cht(filtered_list()) // re-base 2020/Mar/27
+	}
+	function filteredOnly(){
+		refresh_cht(filtered_list()) // re-base 2020/Mar/27
+	}	
+	function set_note(){
+		var note = document.getElementsByName("iframe_note")[0].contentDocument.documentElement.innerText
+		if (note.slice(0,4) != "NOTE") {
+		   note = "NOTE:\n" 
+		}
+		note = note + d3.select("#counter").text() +"; "+ d3.select("#sel_").text() + ' within ' + d3.select("#base_").text() + '\n'
+		document.getElementsByName("iframe_note")[0].contentDocument.documentElement.innerText = note  
+	}
+	function cls_note(){
+		document.getElementsByName("iframe_note")[0].contentDocument.documentElement.innerText = '';  
+	}
+
+// ------------ save csv ---------------------
+
+	function saveCSV() {
+		var blob = new Blob([d3.csv.format(data_sel)], {type: "text/csv;charset=utf-8"});
+		saveAs(blob, 'data_'+getDate() +'.csv');	
+	}
+// ------------ save csv ---------------------  
+     Date.prototype.YYYYMMDDHHMMSS = function () {
+        var yyyy = this.getFullYear().toString();
+        var MM = pad(this.getMonth() + 1,2);
+        var dd = pad(this.getDate(), 2);
+        var hh = pad(this.getHours(), 2);
+        var mm = pad(this.getMinutes(), 2)
+        var ss = pad(this.getSeconds(), 2)
+        return yyyy + MM + dd+  hh + mm + ss;
+    };
+
+    function getDate() {
+        d = new Date();
+        return d.YYYYMMDDHHMMSS();
+    }
+
+    function pad(number, length) {
+
+        var str = '' + number;
+        while (str.length < length) {
+            str = '0' + str;
+        }
+        return str;
+    }	
+	
+	function getCol(matrix, col){                    //hm_hm9: add new function 
+       var column = [];
+       for(var i=0; i<matrix.length; i++){
+          column.push(matrix[i][col]);
+       }
+       return column;
+    }
+	function getColUniq(matrix, col){                //hm_hm9: add new function 
+       var column;
+       for(var i=0; i<matrix.length; i++){
+		if (i==0) {
+			column = ' ' + matrix[i][col];
+		} else {
+			if (!column.includes(matrix[i][col])) {
+				column += ', ' + matrix[i][col];
+			}		
+		}
+       }
+       return column;
+    }	
+
+	function btClick(id) {
+		var x = document.getElementById(id+"_");
+		var y = document.getElementById(id);
+		if (x.style.display === "none") {
+			x.style.display = "block";
+			y.style.backgroundColor = "#88f";
+			if (id = '_side') {
+				a = 1
+			}
+		} else {
+			x.style.display = "none";
+			y.style.backgroundColor = "#ddd";
+		}
+	}
+	
+// for local csv file
+	var renameKeys = (keysMap, obj) => {
+		//debugger;
+		return Object.keys(obj).reduce((acc, key) => {
+			//debugger;
+			const renamedObject = {
+				[keysMap[key] || key]: obj[key]
+			};
+			//debugger;
+			return {
+				...acc,
+				...renamedObject
+			};
+		}, {});
+	};
+
+	var dataCSV = [];
+	function openFile(event) {
+		var input = event.target;
+		var reader = new FileReader();
+		reader.onload = function () {
+			dataCSV = reader.result;
+			dataCSV = dataCSV.split('\n');
+			dataCSV.forEach(function (d, i) { dataCSV[i] = d.split(','); dataCSV[i] = { ...dataCSV[i] }; if (i > 0) { dataCSV[i] = renameKeys(dataCSV[0], dataCSV[i]) }; })
+			dataCSV.splice(0, 1);
+		};
+		reader.readAsText(input.files[0]);
+	}; 
+
+</script>
+<script id="progressive" src="main4.js"></script>
+<script src="./d3.parcoords.js"></script>
+<!-- <script id="progressive" src="main-1.js"></script> -->
