@@ -1,0 +1,247 @@
+/* === from https://syntagmatic.github.io/parallel-coordinates/style.css */
+body {
+  font-size: 14px;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  margin: 0px 100px 0px 10px;
+  width: 99%; /* 720px; */
+  background: hsla(180, 4%, 86%, 0.938);
+  /* line-height: 1.45em; */
+  float: left;
+}
+a {
+  color: #555;
+}
+a:hover {
+  color: #000;
+}
+ul {
+  margin: 0 20px;
+  padding: 0;
+}
+.dark {
+  background: #222;
+}
+#example0,
+#example,
+#example-axes,
+#example1,
+#example2,
+#example3,
+#example-zscore,
+#example-progressive {
+  height: 200px;
+  margin: 12px 0;
+}
+p {
+  width: 560px;
+}
+pre {
+  color: #444;
+  font-family: Ubuntu Mono, Monaco, monospace;
+  padding: 4px 8px;
+  background: #f2f2f2;
+  border: 1px solid #ccc;
+  word-wrap: auto;
+}
+h1 small {
+  font-weight: normal;
+  font-size: 0.5em;
+}
+h3 {
+  margin-top: 40px;
+}
+.float {
+  float: left;
+}
+.centered {
+  text-align: center;
+}
+.hide {
+  display: none;
+}
+input {
+  font-size: 16px;
+}
+
+/* ================================= */
+svg {
+  font: 10px sans-serif;
+}
+
+.background path {
+  fill: none;
+  stroke: #ddd;
+  shape-rendering: crispEdges;
+}
+
+.foreground path {
+  fill: none;
+  stroke: rgb(2, 60, 107);  /* steelblue */
+}
+
+.brush .extent {
+  fill-opacity: .3;
+  stroke: #ff0;
+  shape-rendering: crispEdges;
+}
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+/* hmhm: for text on axis.tick only */
+g.dimension g.tick text {
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  transform: translate(-0px, -5px) rotate(-20deg); 
+}
+
+/* hmhm: for axis title only */
+g.dimension g.axis text.label {                         
+  transform: translate(-0px, -10px) rotate(+20deg); 
+  /* transform: translate(-0px, -10px);  */
+  /* y: -100 !important; */
+/*   cursor: move; */
+}
+/* g.dimension g.axis text.label:hover {                         
+  display:none
+}
+
+g.dimension g.axis text.labelD {                         
+  display:none
+}
+g.dimension g.axis text.labelD:hover {                         
+  transform: translate(-0px, -10px) rotate(+20deg); 
+} */
+
+/* hmhm: for all text on axis  */
+/* g.dimension g.axis text {
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  transform: translate(-0px, -5px) rotate(-20deg); 
+  cursor: move; 
+} */
+
+.lab_max {
+  font-size: 11px  !important;
+  transform: translate(-100px, +10px) rotate(-10deg)
+/*   color: rgb(0,0,255) !important; */
+}
+
+.lab_min {
+  font-size: 11px  !important;
+  transform: translate(-100px, +16px) rotate(-10deg)
+}
+
+.lab_avg {
+  font-size: 11px  !important;
+  transform: translate(-100px, +13px) rotate(-10deg)
+}
+
+.lab_max:hover, .lab_avg:hover, .lab_min:hover {
+  font-size: 20px  !important;
+}
+/* [class^='lab_']:hover {
+  font-size: 20px  !important;
+}*/
+
+.label {
+  font: 12px Arial Narrow  !important;
+}
+.label:hover {
+  font: 20px Arial Narrow  !important;
+}
+/* #caseselector { 
+  position: absolute; left: 90%; top: 70%; 
+} */
+
+iframe {
+  resize: both;
+  overflow: auto;
+}
+
+#infoT, #infoT0
+{
+    display: inline;
+}
+
+b0 {
+  font-size: 32px;
+  color: #1401ef;
+  font-weight: bold;
+}
+
+b2 {
+  font-size: 20px;
+}
+
+bl {
+  font-size: 20px;
+  color: #1401ef;
+}
+
+b3 {
+  font-size: 15px;
+}
+#textBlock
+{
+    display:inline-block; 
+    width:1000px;
+    margin:2px; 
+    padding: 20px; 
+    background-color:white; 
+    vertical-align:text-top;
+}
+
+#textBlock_1
+{
+    display:inline-block; 
+    width:1000px;
+    margin:2px; 
+    padding: 15px; 
+    background-color:white; 
+    vertical-align:text-top;
+}
+
+
+#labelDetail, #line1
+{
+    display: inline;
+}
+#labelDetail
+{
+    float: right
+}
+
+[id^='obs_'] {
+  font-size: 30px  !important;
+}
+
+.dimOff {
+  font-size: 11px;
+  text-decoration: line-through; 
+  background: #d4d3d3; 
+  text-align:right;
+}
+.dimOn {
+  font-size: 12px;
+  background: #37b4fc59; 
+}
+
+.jstree-leaf {
+  font-size: 11px;
+  height: 13px !important;
+  min-height: 12px !important;
+}
+
+.jstree-anchor {
+  display: initial !important;
+}
+/* 
+#chart_dspsm {
+  resize: both;
+  overflow: hidden;
+  border: 1px solid;
+  border-color: lightgrey;
+} */
