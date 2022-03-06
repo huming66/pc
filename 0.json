@@ -1,0 +1,92 @@
+{   
+	"line1": "<b>Historical Performance Analysis ...</b>",
+	"config_hm" : 
+	{
+	"rangeAvg": [],
+	"rangeDim": [],
+	"select_0": [ 
+				["select ...", 
+				  [		  
+ 				  ]
+				],
+				["price @ $0", 
+				  [ ["pp",0, 0.01],["year", 2013,2018]
+				  ],
+ 				  ["<h3>Oberservation of $0 hours ...</h3>",
+ 				  "- There were ~87 hours from 2013 to 2018/Aug with $0 pool price: 2013(3), 2014(0), 2015(3), 2016(4), 2017(62), 2018(Jan-Aug,15)",
+ 				  "<br>- during those hours, the wind generates between 52-1329MW, with average of 894MW",
+ 				  "<br>- the total interchange: from export 333MW to import 905MW, with average of 593MW import",
+ 				  "<br>- <b>Why</b> significent import during $0 period ?",
+ 				  "<br>  --  <b>81</b> of the 87 hours were between April and June - flooding season"
+ 				  ]
+				],
+				["price @ $0, floodind season", 
+				  [ ["pp",0, 0.01],
+					["month", 4,6]				  
+ 				  ],
+ 				  ["<h3>Oberservation of $0 hours during April / May / Jun </h3>",
+ 				  "<b>81 of the 87</b> hours were between April and June - flooding season"
+ 				  ]
+				],
+				["high wind hours", 
+				  [ ["GenW",1200, 1600]
+				  ],
+ 				  ["<h3>Oberservation of wind generation above 1.2 GW </h3>",
+ 				  "- <b>1073</b> hours",
+ 				  "<br>- pool price: 0 - $36.3/MWh, with average @ $17.3/MWh"
+ 				  ]
+				],
+				["low wind hours", 
+				  [ ["GenW",0, 250]
+				  ],
+ 				  ["<h3>Oberservation of wind generation below 250 MW </h3>",
+ 				  "- <b>38.9%</b> of the time from 2013 to 2018/Aug",
+ 				  "<br>- pool price: 0 - $1000/MWh, with average @ $62.9/MWh"
+ 				  ]
+				],
+				["high price", 
+				  [ ["pp",950, 1000]
+				  ],
+ 				  ["<h3>Oberservation of hours above $950/MWh </h3>",
+ 				  "<b>161</b> hours, 149 were before 2016",
+ 				  "<br>- wind generation: 0 - 651MW, with average @ 109 MW",
+ 				  "<br>- Interchange: from export 202MW to import 904MW, with average of 414MW import"
+ 				  ]
+				]
+			  ]
+	},
+	"userInfo" : 
+	[
+		["Application",
+		"<div id='textBlock'>",
+		"<b0>Applicable through the whole analysis process</b0>",
+		"<b1><ul>",
+		"<li>Start with <strong>scoping &amp; assumptions</strong>: based on better understanding of historical situation / performance&nbsp;</li>",
+		"<li><strong>Analysis</strong>: reveal / find patterns and outliers &hellip; debugging &amp; making sense of analysis / simulation results</li>",
+		"<li>End with efficient, transparent and defendable results <strong>communication</strong> to facilitate / engage common understanding and solution</li>",
+		"</ul></b1></div>"
+		],
+		[ "Implementation",
+		"<div id='textBlock'>",
+		"<b0>Implementation:</b0>",
+		"<b1><ul>",
+		"<li>Identify all key factors (coordinates) of your analysis</li>",
+		"<li>Collect &amp; prepare the data as a multi-column CSV file <b3>(on a basic web server)</b3></li>",
+		"<li>Share your interactive dashboard through a web-link and web-browser (Chrome, <b3>Firefox, Edge or IE later version</b3>)</li>",
+		"<li>Customize / enhance <b3>(by coding with open-source front-end web techniques)</b3></li>",
+		"</ul></b1></div>"
+        ],
+        [ "Discussion",
+        "<div id='textBlock'>",
+		"<b0>Promote &amp; coordinate &amp; enhance the capability of <strong>P</strong>arallel &amp; <strong>C</strong>ross thinking, robust reasoning and clear communication</b0>",
+		"<b1><ul><li style='text-align: left;'>Enhance analysis / thinking capability <strong>W</strong>ider <strong>&amp; D</strong>eeper at the same time</li>",
+		"<li style='text-align: left;'>Enable Bi-Directional thinking:",
+		"<ul><li>Details-Focus without losing / sacrificing overall big picture (context, background, inter-relations &hellip;)</li>",
+		"<li>Strategy-Focus without losing practice details and reality</li>",
+		"</ul></li><li style='text-align: left;'>Bridge the gaps between the Bottom-Up (practicing details) and Top-Down (drive decision-making)",
+		"<ul><li>Probabilistic v/s Deterministic planning</li>",
+		"<li>system overall metrics (highly-aggregated / abstracted / summarized) and practice details (time-sequential) in reality</li>",
+		"</ul></li></ul></b1></div>"
+        ]
+	]
+}
